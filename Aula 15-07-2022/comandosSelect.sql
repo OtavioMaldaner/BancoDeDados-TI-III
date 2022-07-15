@@ -32,3 +32,26 @@ SELECT Pnome FROM funcionario WHERE Endereco like "%S_o Paulo%";
 SELECT Pnome, Endereco FROM funcionario WHERE Pnome LIKE "A____";
 -- Em campo data
 SELECT Pnome, Datanasc FROM funcionario WHERE Datanasc LIKE "____-01-__";
+-- Exercício 2
+-- SUM(coluna): retorna a soma dos valores da coluna.
+-- AVG(coluna): retorna a média dos valores da coluna.
+-- MIN(coluna): retorna o valor mínimo da coluna.
+-- MAX(coluna): retorna o valor máximo da coluna.
+-- COUNT(coluna): retorna a quantidade de valores não NULL nesta coluna.
+-- Se for passado COUNT(*), será retornado o número total de registros
+-- independente de quantos tenham valor NULL.
+SELECT SUM(Salario) FROM funcionario;
+SELECT MIN(Salario), MAX(Salario), AVG(Salario) FROM funcionario;
+SELECT MIN(Salario), MAX(Salario), AVG(Salario) FROM funcionario, departamento;
+SELECT MIN(Salario), MAX(Salario), AVG(Salario) FROM funcionario, departamento WHERE funcionario.Dnr=departamento.Dnumero AND departamento.Dnome="Vendas";
+SELECT COUNT(Pnome) FROM funcionario;
+SELECT COUNT(Pnome) FROM funcionario WHERE Sexo = "F";
+SELECT COUNT(*),COUNT(Dnr) FROM funcionario;
+-- GROUP BY: é usado juntamente com funções de agregação para agrupar os
+-- resultados por uma ou mais colunas.
+SELECT Sexo, COUNT(Pnome) FROM funcionario GROUP BY sexo;
+SELECT departamento.Dnome, SUM(funcionario.Salario) FROM funcionario, departamento WHERE funcionario.Dnr=departamento.Dnumero GROUP BY departamento.Dnome;
+-- HAVING: utilizada porque o WHERE não pode ser usado com funções de
+-- agregação. Isto é, WHERE não aceita algo como 'WHERE SUM(salario)>5000'.
+SELECT departamento.Dnome, SUM(funcionario.Salario) FROM departamento, funcionario GROUP BY departamento.Dnome HAVING SUM(funcionario.Salario) > 1500;
+SELECT departamento.Dnome, SUM(funcionario.Salario) FROM funcionario, departamento WHERE funcionario.Dnr = departamento.Dnumero GROUP BY departamento.Dnome HAVING SUM(funcionario.Salario) > 60000;
