@@ -3,7 +3,7 @@
 SELECT Pnome, Datanasc, Dnome FROM funcionario, departamento WHERE funcionario.Dnr = departamento.Dnumero ORDER BY departamento.Dnome, funcionario.Datanasc;
 -- 2. Listar os nomes dos departamentos em que os funcionários do sexo masculino pertencem
 -- na empresa. Os nomes dos departamentos não podem aparecer repetidos.
-SELECT Dnome FROM departamento, funcionario WHERE funcionario.Sexo = 'M' GROUP BY departamento.Dnome;
+SELECT DISTINCT Dnome  FROM departamento JOIN funcionario ON departamento.Dnumero = funcionario.Dnr  WHERE funcionario.Sexo = 'M';
 -- 3. Listar os nomes dos funcionários que tenham a letra “a” no nome e que o sobrenome
 -- termine com a letra “o”.
 SELECT Pnome FROM funcionario WHERE funcionario.Pnome LIKE '%a%'AND funcionario.Unome LIKE '%o';
