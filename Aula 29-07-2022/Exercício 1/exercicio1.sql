@@ -14,3 +14,4 @@ SELECT Pnome, Unome FROM funcionario WHERE funcionario.Cpf NOT IN (SELECT Fcpf F
 -- funcionários que tenham horas de trabalho associado ao projeto. Isso significa que
 -- horas com valor em branco ou nulos não devem se contabilizados. Uso obrigatório
 -- de IS NULL ou IS NOT NULL conforme necessidade.
+SELECT COUNT(trabalha_em.Fcpf), trabalha_em.Pnr FROM trabalha_em WHERE trabalha_em.Horas IS NOT NULL GROUP BY trabalha_em.Pnr;
