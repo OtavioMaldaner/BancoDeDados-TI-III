@@ -11,3 +11,7 @@ SELECT funcionario.Pnome, funcionario.Unome, funcionario.Salario FROM funcionari
 -- 4) Listar o primeiro nome do funcionário e o número de projetos que trabalham todos os
 -- funcionários que moram na cidade de São Paulo que trabalham no departamento Pesquisa e
 -- que trabalham em dois ou mais projetos de empresa.
+SELECT funcionario.Pnome, COUNT(trabalha_em.Fcpf) as projetos FROM funcionario, departamento, trabalha_em WHERE funcionario.Cpf = trabalha_em.Fcpf AND funcionario.Endereco LIKE "%São Paulo%" AND funcionario.Dnr = departamento.Dnumero AND departamento.Dnome = "Pesquisa" GROUP BY funcionario.Cpf HAVING COUNT(trabalha_em.Fcpf) > 1;
+-- 5) Mesmo enunciado da questão anterior, mas adicionando a restrição de que o local dos
+-- projetos também seja São Paulo.
+SELECT funcionario.Pnome, COUNT(trabalha_em.Fcpf) as projetos FROM funcionario, departamento, trabalha_em, projeto WHERE funcionario.Cpf = trabalha_em.Fcpf AND funcionario.Endereco LIKE "%São Paulo%" AND funcionario.Dnr = departamento.Dnumero AND departamento.Dnome = "Pesquisa" GROUP BY funcionario.Cpf AND projeto.Projlocal = "São Paulo" HAVING COUNT(trabalha_em.Fcpf) > 1;
