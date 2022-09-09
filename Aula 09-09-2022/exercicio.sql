@@ -1,0 +1,15 @@
+-- 1) Considerando o banco de dados Empresa, selecionar o nome completo do funcionário, seu
+-- salário, um salário novo (considerando 20% de aumento), e uma coluna contendo os seguintes
+-- valores concatenados (separados por _ ) nesta ordem:
+-- - as primeiras 3 letras do nome do departamento
+-- - código do departamento
+-- - as últimas 3 letras do nome do projeto
+-- - o número do projeto
+-- - nome do funcionário
+-- - quarto, quinto, e sexto dígitos do CPF do funcionário
+-- Considerando as seguintes restrições:
+-- - somente dos funcionários que moram em São Paulo ou que tenham nascido na década de 60.
+-- Apresentando os resultados ordenados em ordem decrescente.
+-- Observação: apenas para deixar claro, caso o funcionário trabalhe em mais de um projeto, seu
+-- nome e salário aparecerão em mais de uma linha no resultado.
+SELECT CONCAT(funcionario.Pnome, ' ', funcionario.Unome) Nome, funcionario.Salario as Salario, (funcionario.Salario * 0.2) + funcionario.Salario as NovoSalario, CONCAT_WS('_', LEFT(departamento.Dnome, 3), funcionario.Dnr, RIGHT(projeto.Projnome, 3), projeto.Projnumero, funcionario.Pnome, SUBSTRING(funcionario.Cpf, 4, 3)) FROM funcionario, departamento, projeto, trabalha_em WHERE funcionario.Dnr = departamento.Dnumero AND trabalha_em.Pnr = projeto.Projnumero AND trabalha_em.Fcpf = funcionario.Cpf AND (funcionario.Endereco LIKE '%São Paulo%' OR funcionario.Datanasc LIKE "196_-__-__") ORDER BY funcionario.Pnome DESC;
