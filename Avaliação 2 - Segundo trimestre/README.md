@@ -1,6 +1,6 @@
 # Avaliação 2 - Segundo trimestre
 ## Observações
-- Baixar o banco de dados empresa2 disponível com a avaliação no Moodle.
+- Baixar o banco de dados [empresa2](https://github.com/OtavioMaldaner/BancoDeDados-TI-III/blob/main/Avaliação%202%20-%20Segundo%20trimestre/empresa2.sql) disponível com a avaliação no Moodle.
 - Cada questão vale 1 ponto.
 ## Questões avaliadas
 1. Faça uma consulta que retorne o nome do funcionário e qual foi o dia da semana (segunda, 
